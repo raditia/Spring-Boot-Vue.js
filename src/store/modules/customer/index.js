@@ -3,7 +3,12 @@ import mutations from './mutations'
 import actions from './actions'
 
 const state = {
-  customerList: []
+  customerList: [],
+  customer: '',
+  totalPage: 0,
+  currentPage: 0,
+  firstPage: '',
+  lastPage: ''
 }
 
 export default {

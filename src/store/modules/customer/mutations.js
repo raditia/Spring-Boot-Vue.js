@@ -11,8 +11,28 @@ const deleteCustomer = (state, response) => {
   customerList.splice(customerList.indexOf(response), 1)
 }
 
+const getTotalPage = (state, response) => {
+  state.totalPage = response
+}
+
+const getCurrentPage = (state, response) => {
+  state.currentPage = response
+}
+
+const getFirstPage = (state, response) => {
+  state.firstPage = response
+}
+
+const getLastPage = (state, response) => {
+  state.lastPage = response
+}
+
 export default {
   getAllCustomer,
   postCustomer,
-  deleteCustomer
+  deleteCustomer,
+  getTotalPage,
+  getCurrentPage,
+  getFirstPage,
+  getLastPage
 }

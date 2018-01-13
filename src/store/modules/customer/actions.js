@@ -3,7 +3,7 @@ import axios from 'axios'
 const doGetAllCustomer = ({commit}) => {
   axios.get('/api/customers')
     .then(response => {
-      commit('getAllCustomer', response.data)
+      commit('getAllCustomer', response.data.content)
     })
     .catch(error => {
       console.log(error)
@@ -45,8 +45,64 @@ const doDeleteCustomer = ({commit}, customerId) => {
     })
 }
 
+const doGetTotalPage = ({commit}) => {
+  axios.get('/api/customers')
+    .then(response => {
+      commit('getTotalPage', response.data.totalPages)
+      console.log(JSON.stringify(response.data.totalPages))
+    })
+    .catch(error => {
+      console.log('Error: ' + error)
+    })
+}
+
+const doGetCurrentPage = ({commit}, pageNumber) => {
+  axios.get('/api/customers?page=' + pageNumber)
+    .then(response => {
+      commit('getCurrentPage', response.data.number)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
+const doMovePage = ({commit}, pageNumber) => {
+  axios.get('/api/customers?page=' + pageNumber)
+    .then(response => {
+      commit('getAllCustomer', response.data.content)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
+const doGetFirstPage = ({commit}, pageNumber) => {
+  axios.get('/api/customers?page=' + pageNumber)
+    .then(response => {
+      commit('getFirstPage', response.data.first)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
+const doGetLastPage = ({commit}, pageNumber) => {
+  axios.get('/api/customers?page=' + pageNumber)
+    .then(response => {
+      commit('getLastPage', response.data.last)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
 export default {
   doGetAllCustomer,
   doPostCustomer,
-  doDeleteCustomer
+  doDeleteCustomer,
+  doGetTotalPage,
+  doGetCurrentPage,
+  doMovePage,
+  doGetFirstPage,
+  doGetLastPage
 }
