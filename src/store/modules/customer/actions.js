@@ -10,9 +10,40 @@ const doGetAllCustomer = ({commit}) => {
     })
 }
 
+const doGetOneCustomer = ({commit, customerId}) => {
+  axios.get('/api/customers/' + customerId)
+    .then(response => {
+      commit('getOneCustomer', response.data)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
 const doPostCustomer = ({commit}, customerData) => {
   axios.post(
     '/api/customers', {
+      name: customerData.name,
+      address: {
+        country: customerData.country,
+        province: customerData.province,
+        city: customerData.city,
+        street: customerData.street
+      }
+    }, {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
+    .then(response => {
+      commit('postCustomer', response.data)
+    })
+    .catch(error => {
+      console.log('Error: ' + error)
+    })
+}
+const doUpdateCustomer = ({commit}, customerData) => {
+  axios.put('/api/customers/' + customerData.id, {
     name: customerData.name,
     address: {
       country: customerData.country,
@@ -26,10 +57,10 @@ const doPostCustomer = ({commit}, customerData) => {
     }
   })
     .then(response => {
-      commit('postCustomer', response.data)
+      commit('updateCustomer', response.data)
     })
     .catch(error => {
-      console.log('Error: ' + error)
+      console.log(error)
     })
 }
 
@@ -98,7 +129,9 @@ const doGetLastPage = ({commit}, pageNumber) => {
 
 export default {
   doGetAllCustomer,
+  doGetOneCustomer,
   doPostCustomer,
+  doUpdateCustomer,
   doDeleteCustomer,
   doGetTotalPage,
   doGetCurrentPage,

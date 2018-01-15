@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <Navbar></Navbar>
+    <!--<Form></Form>-->
     <!-- <Links></Links> -->
     <!--<img src="./assets/logo.png">-->
     <router-view/>
@@ -8,10 +10,18 @@
 
 <script>
 import Links from '@/components/Links'
+import Navbar from '@/components/Navbar'
+import Form from '@/components/customer/Form'
+import CustomerEditModal from '@/components/customer/CustomerEditModal'
 
 export default {
   name: 'app',
-  components: {Links}
+  components: {
+    Links,
+    Navbar,
+    Form,
+    CustomerEditModal
+  }
 }
 </script>
 
@@ -20,8 +30,8 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /*text-align: center;*/
   color: #2c3e50;
-  margin-top: 60px;
+  /*margin-top: 60px;*/
 }
 </style>
